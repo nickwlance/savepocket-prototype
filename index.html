@@ -269,7 +269,16 @@ body{
   .toolbar{padding:10px 14px}
   .toolbar .search{display:none}
   .user-pill .txt{display:none}
-  .pages{padding:14px 14px 110px}
+  .pages{padding:14px 14px 110px;overflow-x:hidden}
+  .page-head{min-width:0}
+  .page-head>div:first-child{min-width:0;flex:1}
+  .page-head .sub{overflow-wrap:break-word;word-break:break-word}
+  .page-head .actions{width:100%;margin-left:0}
+  .set-row{gap:10px}
+  .set-row .k{min-width:0;overflow-wrap:break-word}
+  .set-row .v{min-width:0;text-align:right;overflow-wrap:break-word}
+  .filters input,.filters select{max-width:100%}
+  .card{min-width:0;overflow-wrap:break-word}
   .tabbar{display:block}
   .kpis{grid-template-columns:repeat(2,1fr);gap:10px}
   .kpi{padding:13px}.kpi .vl{font-size:19px}
