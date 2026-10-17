@@ -584,9 +584,9 @@ body{
             <div class="trip-meta"><h2>東京賞櫻與美食之旅 2025</h2><p>2025/03/24 – 03/30 · 匯率 1 HKD ≈ 19.23 JPY · 進行中</p></div>
           </div>
           <div class="actions">
-            <button class="btn btn-ghost">＋ 邀請旅伴</button>
+            <button class="btn btn-ghost" onclick="openInvite()">＋ 邀請旅伴</button>
             <button class="btn btn-ghost">⤓ 對帳 PDF</button>
-            <button class="btn btn-blue" onclick="openModal()">＋ 群組開銷</button>
+            <button class="btn btn-blue" onclick="openGExpense()">＋ 群組開銷</button>
           </div>
         </div>
         <div class="card" style="margin-bottom:14px">
@@ -648,7 +648,7 @@ body{
       <section class="page" id="page-budgets">
         <div class="page-head">
           <div><h1>預算管理</h1><div class="sub">2025年10月 · 控制支出，留住財富</div></div>
-          <div class="actions"><button class="btn" style="background:var(--orange);color:#fff">＋ 新增預算</button></div>
+          <div class="actions"><button class="btn" style="background:var(--orange);color:#fff" onclick="openBudget()">＋ 新增預算</button></div>
         </div>
         <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg,#134E48,#1a6b61);color:#fff;border:0">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
@@ -755,7 +755,7 @@ body{
           <div><h1>帳戶總覽</h1><div class="sub">所有資金，一目了然</div></div>
           <div class="actions">
             <button class="btn btn-ghost">連結機構</button>
-            <button class="btn" style="background:var(--orange);color:#fff">＋ 新增帳戶</button>
+            <button class="btn" style="background:var(--orange);color:#fff" onclick="openAccount()">＋ 新增帳戶</button>
           </div>
         </div>
         <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg,#0d3a35,#134E48 60%,#1a6b61);color:#fff;border:0">
@@ -788,7 +788,7 @@ body{
       <section class="page" id="page-recurring">
         <div class="page-head">
           <div><h1>週期性交易</h1><div class="sub">固定收支，自動提醒</div></div>
-          <div class="actions"><button class="btn" style="background:var(--orange);color:#fff">＋ 新增週期性</button></div>
+          <div class="actions"><button class="btn" style="background:var(--orange);color:#fff" onclick="openRecurring()">＋ 新增週期性</button></div>
         </div>
         <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg,#134E48,#1a6b61);color:#fff;border:0">
           <div style="font-size:13px;opacity:.85">每月週期性摘要</div>
@@ -896,7 +896,7 @@ body{
   <div class="modal" role="dialog" aria-modal="true" aria-label="快速記帳">
     <div class="modal-head">
       <div><h2>快速記帳</h2><div class="sub" id="modal-type-label">EXPENSE</div></div>
-      <button class="x-btn" onclick="closeModal()" aria-label="關閉">✕</button>
+      <button class="x-btn" onclick="closeModal('quick-modal')" aria-label="關閉">✕</button>
     </div>
     <div class="modal-body">
       <div class="type-seg" id="type-seg">
@@ -932,9 +932,187 @@ body{
     </div>
     <div class="modal-foot">
       <label class="check-lb"><input type="checkbox"> 同時設為週期性每月支出</label>
-      <button class="btn btn-ghost" onclick="closeModal()">取消</button>
-      <button class="btn btn-teal" style="flex:1;justify-content:center" onclick="closeModal()">儲存記一筆</button>
+      <button class="btn btn-ghost" onclick="closeModal('quick-modal')">取消</button>
+      <button class="btn btn-teal" style="flex:1;justify-content:center" onclick="closeModal('quick-modal')">儲存記一筆</button>
     </div>
+  </div>
+</div>
+
+
+<!-- ══ Invite Companion Modal ══ -->
+<div class="overlay" id="invite-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="邀請旅伴">
+    <div style="width:40px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 0"></div>
+    <div class="modal-head">
+      <div><h2>邀請旅伴</h2></div>
+      <button class="x-btn" onclick="closeModal('invite-modal')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:12px;padding:12px;margin-bottom:16px">
+        <span style="width:40px;height:40px;border-radius:12px;background:#e0f2f1;color:#0d7a6e;display:grid;place-items:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+        <div><div style="font-weight:700;font-size:14px">東京賞櫻與美食之旅</div><div style="font-size:12px;color:var(--ink3)">2025/03/24 – 03/30 · 4 位旅伴</div></div>
+      </div>
+      <div class="sec-lb"><span>透過連結邀請</span></div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <input value="https://savepocket.app/invite/tokyo2026-ab12" readonly style="flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;background:var(--bg);color:var(--ink2)">
+        <button class="btn btn-blue" onclick="this.textContent='已複製'" style="flex-shrink:0">複製</button>
+      </div>
+      <div class="sec-lb"><span>透過電郵邀請</span></div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <input placeholder="輸入電郵地址" type="email" style="flex:1;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px">
+        <button class="btn btn-teal" style="flex-shrink:0">傳送邀請</button>
+      </div>
+      <div class="sec-lb"><span>權限</span></div>
+      <div class="seg" style="width:100%;margin-bottom:16px">
+        <button class="on" style="flex:1">可記帳</button><button style="flex:1">僅查看</button>
+      </div>
+      <div class="sec-lb"><span>已邀請成員</span></div>
+      <div class="txn-mini"><span><b>陳大文</b></span><span class="status ok">已加入</span></div>
+      <div class="txn-mini"><span><b>李美儀</b></span><span class="status pend" style="background:var(--bg);color:var(--ink3)">邀請已傳送</span></div>
+      <div class="txn-mini" style="border:0"><span><b>王志強</b></span><span class="status pend">待接受</span></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="closeModal('invite-modal')">取消</button></div>
+  </div>
+</div>
+
+<!-- ══ Group Expense Modal ══ -->
+<div class="overlay" id="gexpense-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="記一筆群組開銷">
+    <div style="width:40px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 0"></div>
+    <div class="modal-head">
+      <div><h2>記一筆群組開銷</h2><div class="sub">GROUP EXPENSE</div></div>
+      <button class="x-btn" onclick="closeModal('gexpense-modal')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="amount-row"><span class="cur">HKD$</span><input id="gamt" inputmode="decimal" placeholder="0.00" value="1600.00"></div>
+      <div style="font-size:12px;color:var(--ink3);margin-bottom:14px">≈ ¥30,850（即時匯率 1 HKD ≈ 19.28 JPY）</div>
+      <div class="sec-lb"><span>分類</span></div>
+      <div class="cat-grid" style="grid-template-columns:repeat(3,1fr)">
+        <button class="cat sel"><span class="ci" style="background:#fff4e0;color:#b26a00">餐飲</span></button>
+        <button class="cat"><span class="ci" style="background:#e0f2f1;color:#0d7a6e">住宿</span></button>
+        <button class="cat"><span class="ci" style="background:#e8f1ff;color:#0066cc">交通</span></button>
+        <button class="cat"><span class="ci" style="background:#f3e8ff;color:#7c3aed">門票</span></button>
+        <button class="cat"><span class="ci" style="background:#fce4ec;color:#c2185b">購物</span></button>
+        <button class="cat"><span class="ci" style="background:#f5f5f5;color:#616161">其他</span></button>
+      </div>
+      <div class="field"><label>誰先墊付</label>
+        <div style="display:flex;gap:8px"><select style="flex:1"><option>Alex Chen</option><option>Wong</option><option>李</option><option>Kwok</option></select>
+        <button class="btn btn-ghost" style="flex-shrink:0">切換</button></div>
+      </div>
+      <div class="field"><label>日期</label><input type="date" value="2025-03-28"></div>
+      <div class="sec-lb"><span>分攤方式</span></div>
+      <div class="seg" style="width:100%;margin-bottom:14px">
+        <button class="on" style="flex:1">平均分攤</button><button style="flex:1">自訂金額</button><button style="flex:1">按比例</button>
+      </div>
+      <div class="sec-lb"><span>成員分攤</span><span style="font-size:12px;color:var(--ink3)">每人 HK$400.00</span></div>
+      <div class="txn-mini"><span><b>Alex Chen</b></span><span><b>HK$400.00</b> <input type="checkbox" checked style="accent-color:var(--teal)"></span></div>
+      <div class="txn-mini"><span><b>Wong</b></span><span><b>HK$400.00</b> <input type="checkbox" checked style="accent-color:var(--teal)"></span></div>
+      <div class="txn-mini"><span><b>李</b></span><span><b>HK$400.00</b> <input type="checkbox" checked style="accent-color:var(--teal)"></span></div>
+      <div class="txn-mini" style="border:0"><span><b>Kwok</b></span><span><b>HK$400.00</b> <input type="checkbox" checked style="accent-color:var(--teal)"></span></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-teal" style="flex:1;justify-content:center" onclick="closeModal('gexpense-modal')">儲存開銷（HK$1,600.00）</button></div>
+  </div>
+</div>
+
+<!-- ══ Add Budget Modal ══ -->
+<div class="overlay" id="budget-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="新增預算">
+    <div style="width:40px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 0"></div>
+    <div class="modal-head">
+      <div><h2>新增預算</h2></div>
+      <button class="x-btn" onclick="closeModal('budget-modal')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="amount-row"><span class="cur">HKD$</span><input inputmode="decimal" placeholder="0.00" value="5000.00"></div>
+      <div class="chips"><button>+500</button><button>+1,000</button><button>+2,000</button></div>
+      <div class="sec-lb"><span>預算類別</span></div>
+      <div class="cat-grid" style="grid-template-columns:repeat(3,1fr)">
+        <button class="cat sel"><span class="ci" style="background:#fff4e0;color:#b26a00">餐飲</span></button>
+        <button class="cat"><span class="ci" style="background:#e8f1ff;color:#0066cc">交通</span></button>
+        <button class="cat"><span class="ci" style="background:#f3e8ff;color:#7c3aed">購物</span></button>
+        <button class="cat"><span class="ci" style="background:#fff8e1;color:#b26a00">居住</span></button>
+        <button class="cat"><span class="ci" style="background:#fce4ec;color:#c2185b">娛樂</span></button>
+        <button class="cat"><span class="ci" style="background:#e8f5e9;color:#1a7f37">醫療</span></button>
+      </div>
+      <div class="sec-lb"><span>週期</span></div>
+      <div class="seg" style="width:100%;margin-bottom:14px">
+        <button class="on" style="flex:1">每月</button><button style="flex:1">每季</button><button style="flex:1">每年</button>
+      </div>
+      <div class="field"><label>開始日期</label><input type="date" value="2025-11-01"></div>
+      <div class="sec-lb"><span>超支預警提醒</span><span style="font-size:13px;color:var(--teal);font-weight:700">80%</span></div>
+      <input type="range" min="50" max="100" value="80" style="width:100%;accent-color:var(--teal);margin-bottom:8px">
+      <div style="font-size:12px;color:var(--ink3);margin-bottom:6px">當該分類支出達到預算的 80%（HK$4,000）時將自動推送通知</div>
+    </div>
+    <div class="modal-foot"><button class="btn" style="flex:1;justify-content:center;background:var(--orange);color:#fff" onclick="closeModal('budget-modal')">儲存預算設定</button></div>
+  </div>
+</div>
+
+<!-- ══ Add Account Modal ══ -->
+<div class="overlay" id="account-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="新增帳戶">
+    <div style="width:40px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 0"></div>
+    <div class="modal-head">
+      <div><h2>新增帳戶</h2></div>
+      <button class="x-btn" onclick="closeModal('account-modal')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="sec-lb"><span>銀行／機構</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
+        <button class="btn btn-ghost on" style="border-color:var(--teal);color:var(--teal)">HSBC</button>
+        <button class="btn btn-ghost">Mox</button>
+        <button class="btn btn-ghost">ZA Bank</button>
+        <button class="btn btn-ghost">八達通</button>
+        <button class="btn btn-ghost">IBKR</button>
+        <button class="btn btn-ghost">其他</button>
+      </div>
+      <div class="sec-lb"><span>帳戶類型</span></div>
+      <div class="seg" style="width:100%;margin-bottom:14px">
+        <button class="on" style="flex:1">儲蓄</button><button style="flex:1">信用卡</button><button style="flex:1">投資</button><button style="flex:1">現金</button>
+      </div>
+      <div class="field"><label>帳戶名稱</label><input value="HSBC 日常主帳戶"></div>
+      <div class="field"><label>初始結餘</label><input inputmode="decimal" value="HK$ 45,200.00"></div>
+      <div class="set-row"><span class="k">設為主要預設帳戶</span><button class="switch on" onclick="this.classList.toggle('on')"></button></div>
+    </div>
+    <div class="modal-foot"><button class="btn" style="flex:1;justify-content:center;background:var(--orange);color:#fff" onclick="closeModal('account-modal')">儲存並啟用帳戶（HK$45,200.00）</button></div>
+  </div>
+</div>
+
+<!-- ══ Add Recurring Modal ══ -->
+<div class="overlay" id="recurring-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="新增週期性交易">
+    <div style="width:40px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 0"></div>
+    <div class="modal-head">
+      <div><h2>新增週期性交易</h2></div>
+      <button class="x-btn" onclick="closeModal('recurring-modal')" aria-label="關閉">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="type-seg" id="rec-type-seg">
+        <button class="on" data-type="EXPENSE">支出</button>
+        <button data-type="INCOME">收入</button>
+      </div>
+      <div class="amount-row"><span class="cur">HKD$</span><input inputmode="decimal" placeholder="0.00" value="12000.00"></div>
+      <div class="chips"><button>+1,000</button><button>+5,000</button><button>+10,000</button></div>
+      <div class="field"><label>名稱</label><input value="房租支出"></div>
+      <div class="sec-lb"><span>分類</span></div>
+      <div class="cat-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:14px">
+        <button class="cat sel"><span class="ci" style="background:#fff8e1;color:#b26a00">住宿</span></button>
+        <button class="cat"><span class="ci" style="background:#fff4e0;color:#b26a00">餐飲</span></button>
+        <button class="cat"><span class="ci" style="background:#e8f1ff;color:#0066cc">交通</span></button>
+        <button class="cat"><span class="ci" style="background:#f3e8ff;color:#7c3aed">購物</span></button>
+        <button class="cat"><span class="ci" style="background:#f5f5f5;color:#616161">其他</span></button>
+      </div>
+      <div class="sec-lb"><span>頻率</span></div>
+      <div class="seg" style="width:100%;margin-bottom:14px">
+        <button class="on" style="flex:1">每月</button><button style="flex:1">每季</button><button style="flex:1">每年</button>
+      </div>
+      <div class="field"><label>下次執行日期</label><input type="datetime-local" value="2025-11-01T09:00"></div>
+      <div class="field"><label>扣款帳戶</label>
+        <div style="display:flex;gap:8px"><select style="flex:1"><option>HSBC 滙豐卓越理財 ····9821（HK$348,200）</option><option>Mox（HK$85,400）</option></select>
+        <button class="btn btn-ghost" style="flex-shrink:0">切換</button></div>
+      </div>
+      <div class="field" style="margin-bottom:0"><label>備註</label><input value="九龍塘寓所每月租金自動轉帳"></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-teal" style="flex:1;justify-content:center" onclick="closeModal('recurring-modal')">儲存週期性交易（HK$12,000.00）</button></div>
   </div>
 </div>
 
@@ -950,8 +1128,13 @@ document.querySelectorAll('#desk-nav button').forEach(b=>b.onclick=()=>go(b.data
 document.querySelectorAll('#mobile-nav .tab').forEach(b=>b.onclick=()=>go(b.dataset.page));
 // Modal
 function openModal(){document.getElementById('quick-modal').classList.add('show');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('quick-modal').classList.remove('show');document.body.style.overflow=''}
-document.getElementById('quick-modal').addEventListener('click',e=>{if(e.target.id==='quick-modal')closeModal()});
+function openInvite(){document.getElementById('invite-modal').classList.add('show');document.body.style.overflow='hidden'}
+function openGExpense(){document.getElementById('gexpense-modal').classList.add('show');document.body.style.overflow='hidden'}
+function openBudget(){document.getElementById('budget-modal').classList.add('show');document.body.style.overflow='hidden'}
+function openAccount(){document.getElementById('account-modal').classList.add('show');document.body.style.overflow='hidden'}
+function openRecurring(){document.getElementById('recurring-modal').classList.add('show');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id||'quick-modal').classList.remove('show');document.body.style.overflow=''}
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o.id)}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 // Type segmented
 document.querySelectorAll('#type-seg button').forEach(b=>b.onclick=()=>{
